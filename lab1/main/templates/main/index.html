@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+    <div class="posts">
+    {% for post in posts %}
+      <div class="post">
+        <h3>{{ post.short_description }}</h3>
+        <img src="{{ post.image.url }}" alt="{{ post.short_description }}">
+        <a class="index_a" href="{% url 'about' post.id %}">Голосовать</a>
+      </div>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'main/layout.html' %}
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+        <div class="container d-flex justify-content-center align-items-center">
+             <div class="card">
+              <div class="user text-center">
+                <div class="profile">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for field in user_form %}
+                            {{field.label}}
+                            {{field}}
+                        {% endfor %}
+
+                        {% for field1 in profile_form %}
+                            {{field1.label}}
+                            {{field1}}
+                        {% endfor %}
+
+                        <button type="submit">Обновить</button>
+                    </form>
+                </div>
+              </div>
+              <div class="mt-5 text-center">
+                <h2 class="mb-0">{{ user.username }}</h2>
+              </div>
+                 <a class="profile_logout" href="{% url 'logout' %}">ВЫЙТИ</a>
+             </div>
+           </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Про нас{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>{{ post.short_description }}</h2>
+        <img src="{{ post.image.url }}" alt="{{ post.short_description }}">
+        <p>{{ post.full_description }}</p>
+
+        {% for choice in choices %}
+          <div class="choice">
+            <input type="radio" name="choice" value="{{ choice.id }}">
+            <label>{{ choice.text }}</label>
+          </div>
+        {% endfor %}
+        <button type="submit">Подтвердить</button>
+        <h3>Результаты голосования:</h3>
+        {% for percentage in percentages %}
+          <p>{{ percentage.0 }}: {{ percentage.1 }}%</p>
+        {% endfor %}
+    </form>
+{% endblock %}
